@@ -1,7 +1,8 @@
 $(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
-
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+  var url = window.location.href;
+  var userName = (/\w\/(\w+)/).exec(url);
+  $('.container').html("<h1> Wait for it... </h1><div id='spinner'></div>")
+  $.get('/' + userName[1], function(serverResponse) {
+    $('.container').html(serverResponse);
+  });
 });

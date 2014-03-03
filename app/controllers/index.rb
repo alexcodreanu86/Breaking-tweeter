@@ -15,5 +15,10 @@ get '/:username' do
     @user.fetch_tweets!
     @tweets = @user.tweets
   end
-  erb :user_tweets
+  erb :user_tweets, layout: !request.xhr?
 end
+
+# get '/is_stale/:username' do
+
+# end
+

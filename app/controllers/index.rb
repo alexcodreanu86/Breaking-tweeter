@@ -1,4 +1,5 @@
 get '/' do
+  erb :index
 end
 
 get '/:username' do
@@ -16,6 +17,16 @@ get '/:username' do
     @tweets = @user.tweets
   end
   erb :user_tweets, layout: !request.xhr?
+end
+
+post "/tweet" do
+  @text = params[:tweet]
+  tweet_status = $client.update(@text)
+  if tweet_status
+    erb :tweeted, layout: !request.xhr?
+  else
+    erb :failed_tweet, layout: !request.xhr?
+  end
 end
 
 # get '/is_stale/:username' do
